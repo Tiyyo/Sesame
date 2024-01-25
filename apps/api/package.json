@@ -1,0 +1,52 @@
+{
+  "name": "@sesame/api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "vitest",
+    "dev": "nodemon --exec ts-node-transpile-only ./index.ts",
+    "db:migrate": "ts-node-transpile-only ./database/migrate.ts",
+    "db:down": "ts-node-transpile-only ./database/reset.ts",
+    "db:up": "ts-node-transpile-only ./database/up.ts",
+    "gen:types": "pnpm exec kysely-codegen --out-file  C:\\Users\\Tiyyo\\Documents\\Projets\\sesame\\apps\\api\\types\\database.d.ts"
+  },
+  "imports": {
+    "#errors/*": "./app/helpers/errors/*.js",
+    "#helpers/*": "./app/helpers/*.js",
+    "#controllers/*": "./app/controllers/*.js",
+    "#services/*": "./app/services/*.js",
+    "#middlewares/*": "./app/middlewares/*.js"
+  },
+  "dependencies": {
+    "@sesame/schema": "workspace:^",
+    "bcrypt": "^5.1.1",
+    "better-sqlite3": "^9.3.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "install": "^0.13.0",
+    "jsonwebtoken": "^9.0.2",
+    "kysely": "^0.27.2",
+    "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "@sesame/typescript-config": "workspace:*",
+    "@types/bcrypt": "^5.0.1",
+    "@types/better-sqlite3": "^7.6.6",
+    "@types/cookie-parser": "^1.4.5",
+    "@types/cors": "^2.8.15",
+    "@types/express": "^4.17.20",
+    "@types/jsonwebtoken": "^9.0.4",
+    "@types/node": "^20.8.10",
+    "eslint": "^8.56.0",
+    "kysely-codegen": "^0.11.0",
+    "rimraf": "^5.0.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.3",
+    "vitest": "^0.34.6"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

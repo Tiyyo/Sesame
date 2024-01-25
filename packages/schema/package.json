@@ -1,0 +1,21 @@
+{
+  "name": "@sesame/schema",
+  "version": "1.0.0",
+  "main": "dist/index",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "pnpm run clean:build && pnpm run compile",
+    "compile": "tsc",
+    "clean:build": "rimraf ./dist",
+    "prepublishOnly": "pnpm run build"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "typescript": "^5.2.2",
+    "rimraf": "^5.0.5"
+  }
+}
