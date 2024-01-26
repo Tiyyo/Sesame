@@ -17,46 +17,46 @@ describe('logout controller', () => {
   )
   it('should return 204 status', async () => {
     const mockRequest = {
-      cookies: {
-        _token: 'test'
+      headers: {
+        authorization: 'Barear test'
       }
     } as Request;
     const req = mockRequest;
     const res = mockResponse();
-    const next = vi.fn();
     tokenService.destroy = vi.fn().mockResolvedValue(true);
 
-    await logoutController.logout(req, res, next);
+    await logoutController.logout(req, res);
 
     expect(res.status).toHaveBeenCalledWith(204);
     expect(res.end).toHaveBeenCalled();
   })
   it('should call clearCookie with _token', async () => {
     const mockRequest = {
-      cookies: {
-        _token: 'test'
+      headers: {
+        authorization: 'Barear test'
       }
     } as Request;
     const req = mockRequest;
     const res = mockResponse();
-    const next = vi.fn();
-    await logoutController.logout(req, res, next);
+
+    await logoutController.logout(req, res);
+
     expect(res.clearCookie).toHaveBeenCalledWith('_token');
     expect(res.end).toHaveBeenCalled();
   })
   it('should call tokenService.destroy', async () => {
     const mockRequest = {
-      cookies: {
-        _token: 'test'
+      headers: {
+        authorization: 'Barear test'
       }
     } as Request;
     const req = mockRequest;
     const res = mockResponse();
-    const next = vi.fn();
     tokenService.destroy = vi.fn().mockResolvedValue(true);
 
-    await logoutController.logout(req, res, next);
-    expect(tokenService.destroy).toHaveBeenCalledWith(req.cookies._token);
+    await logoutController.logout(req, res);
+
+    expect(tokenService.destroy).toHaveBeenCalledWith('test');
     expect(res.end).toHaveBeenCalled();
   })
 });

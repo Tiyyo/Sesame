@@ -21,7 +21,17 @@ export default function LogoutBn() {
   };
   return (
     <form onClick={handleLogout}>
-      <button className={css({})}>Logout</button>
+      <button
+        className={css({
+          bg: 'primary-100',
+          p: '0.5rem 1rem',
+          rounded: '24px',
+          color: 'white',
+          fontWeight: '600',
+          cursor: 'pointer',
+        })}>
+        Logout
+      </button>
     </form>
   );
 }

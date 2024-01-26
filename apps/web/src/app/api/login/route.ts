@@ -4,7 +4,6 @@ export async function POST(request: NextRequest) {
   const requestBody = await request.json()
   const body = JSON.stringify(requestBody)
 
-  // TODO: check if the data is stil valid before hitting the API
   try {
     const res = await fetch(`${process.env.API_BASE_URL}/api/auth/login`, {
       method: 'POST',

@@ -7,7 +7,7 @@ export class APIError extends Error {
     super(message);
     this.name = 'APIError';
     this.status = 500;
-    this.userMessage = message;
+    this.userMessage = 'Internal server error';
     this.message = message
   }
 }

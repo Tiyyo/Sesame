@@ -5,7 +5,7 @@ import { TokenAuthError } from "../module/auth/services/token.service";
 
 
 export class AuthMiddleware {
-  static async authenticate(req: Request, res: Response, next: NextFunction) {
+  static async authenticate(req: Request, _res: Response, next: NextFunction) {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
       next(new UnauthorizedError('Unauthorized', "Auth middleware didn\'t find token to authenticate"));

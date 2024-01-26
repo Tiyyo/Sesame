@@ -11,7 +11,7 @@ const product = css({
   display: 'flex',
   flexDirection: 'column',
   width: '250px',
-  rounded: '24px',
+  rounded: '6px',
   overflow: 'hidden',
   border: '1px solid grey',
 });

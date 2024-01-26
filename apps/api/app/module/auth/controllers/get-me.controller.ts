@@ -1,4 +1,5 @@
 import { CoreController } from "../../../helpers/controller"
+import { UnauthorizedError } from '../../../helpers/exceptions/unauthorized.error'
 import { tokenService } from "../index.auth"
 import { Request, Response } from "express"
 
@@ -9,6 +10,7 @@ class GetMeController extends CoreController {
 
   async me(req: Request, res: Response) {
     const token = req.headers.authorization?.split(' ')[1];
+    if (!token) throw new UnauthorizedError('Unauthorized', 'Token was not found in controller')
 
     const userId = await tokenService.verify(token!)
 

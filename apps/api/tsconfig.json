@@ -6,6 +6,14 @@
     "types": [
       "vitest/globals"
     ],
+    "paths": {
+      "#exceptions": [
+        "./app/helpers/exceptions/*"
+      ],
+      "#types/*": [
+        "./app/types/*"
+      ],
+    },
     "esModuleInterop": true,
     "target": "ES6",
     "sourceMap": true,

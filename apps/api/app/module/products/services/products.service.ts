@@ -8,8 +8,7 @@ export default class ProductsService {
         'Content-Type': 'application/json',
       },
     }).then((res) => res.json())
-      //TODO: handle error 
-      .catch((err) => console.log(err));
+      .catch((err) => ({ error: 'Could not retrieve products from ProductsService.get' + err, status: 404 }));
 
     return fetchData.results[0].data.articles
 

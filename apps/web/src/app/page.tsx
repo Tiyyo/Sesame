@@ -17,7 +17,7 @@ export async function getProdutcs() {
   const token = cookieStore.get('_token');
   if (!token) throw new Error('User is not logged in');
 
-  const results = await fetch('http://localhost:8000/api/products', {
+  const results = await fetch(`${process.env.API_BASE_URL}/api/products`, {
     method: 'GET',
     cache: 'no-cache',
     headers: {
@@ -52,7 +52,7 @@ export default async function Home() {
           padding: '0 15px',
           height: '60px',
         })}>
-        <p>Hello 🐼!</p> <LogoutBn />
+        <p className={css({ color: 'primary-500' })}>Hello 🐼!</p> <LogoutBn />
       </header>
       <main>
         <ProductsContainer products={products} />

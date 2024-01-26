@@ -3,6 +3,7 @@ import { DB } from '../../../../types/database'
 import { DatabaseError } from '../../../helpers/exceptions/database.error'
 
 
+
 export class UserModel {
 
   constructor(private db: Kysely<DB>) {

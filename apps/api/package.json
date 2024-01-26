@@ -10,13 +10,6 @@
     "db:up": "ts-node-transpile-only ./database/up.ts",
     "gen:types": "pnpm exec kysely-codegen --out-file  C:\\Users\\Tiyyo\\Documents\\Projets\\sesame\\apps\\api\\types\\database.d.ts"
   },
-  "imports": {
-    "#errors/*": "./app/helpers/errors/*.js",
-    "#helpers/*": "./app/helpers/*.js",
-    "#controllers/*": "./app/controllers/*.js",
-    "#services/*": "./app/services/*.js",
-    "#middlewares/*": "./app/middlewares/*.js"
-  },
   "dependencies": {
     "@sesame/schema": "workspace:^",
     "bcrypt": "^5.1.1",

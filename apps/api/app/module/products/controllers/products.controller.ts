@@ -14,6 +14,10 @@ class ProductController extends CoreController {
   async getAll(_req: Request, res: Response, next: NextFunction) {
     const products = await productService.get();
 
+    if (products.error) {
+      return res.status(products.status).json({ error: products.error });
+    }
+
     return res.status(200).json({ success: true, data: products });
   }
 }

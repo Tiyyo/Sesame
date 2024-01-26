@@ -2,7 +2,6 @@ import { Kysely } from 'kysely'
 import { DB } from '../../../../types/database'
 import { DatabaseError } from '../../../helpers/exceptions/database.error'
 
-
 export class TokenModel {
   declare db
 

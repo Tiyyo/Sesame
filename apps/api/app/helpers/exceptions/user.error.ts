@@ -1,6 +1,5 @@
 export class UserError {
   name = 'UserError';
-
   declare status: number
 
   declare message: string

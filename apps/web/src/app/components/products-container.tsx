@@ -16,6 +16,7 @@ export default function ProductsContainer({
       className={css({
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+        justifyItems: 'center',
         padding: '50px 25px',
         gap: '15px 30px',
       })}>

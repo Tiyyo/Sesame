@@ -17,8 +17,8 @@ describe('get me controller', () => {
   )
   it('should called tokenService with token if present in cookie', async () => {
     const mockRequest = {
-      cookies: {
-        _token: 'test'
+      headers: {
+        authorization: 'Barear test'
       }
     } as Request;
     const res = mockResponse();
@@ -29,8 +29,8 @@ describe('get me controller', () => {
   })
   it('should return userId if token is valid', async () => {
     const mockRequest = {
-      cookies: {
-        _token: 'test'
+      headers: {
+        authorization: 'Barear test'
       }
     } as Request;
     const res = mockResponse();

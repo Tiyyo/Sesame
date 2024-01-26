@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { CoreController } from '../../../helpers/controller';
 import { loginService } from '../index.auth';
-import { UserError } from '../../../helpers/exceptions/user.error';
+import { UserError } from '../../../helpers/exceptions/user.error'
+
 
 class LoginController extends CoreController {
   constructor() {
