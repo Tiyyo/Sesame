@@ -64,8 +64,8 @@ export default function Page() {
 
     if (result.message === 'Login Success') router.push('/');
     if (result.error) {
-      setErrorServer(result.error);
       setTriggerCountNotif(triggerCountNotif + 1);
+      setErrorServer(result.error);
     }
   };
 

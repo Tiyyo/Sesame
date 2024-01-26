@@ -118,7 +118,7 @@ export default function Page() {
               className={icons}
             />
           }
-          error={errors.confirmedPassword?.message}
+          error={errors.confirm?.message}
           register={register}
         />
         <Button textContent="Sign up" />
