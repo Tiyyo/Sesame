@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "rootDir": "./src",
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "types": [
+      "node",
+      "zod"
+    ],
+    "module": "CommonJS",
+    "target": "ES6",
+    "sourceMap": true,
+    "strict": true,
+    "declaration": true,
+    "noEmitOnError": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noEmit": false,
+    "composite": true
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+  ]
+}

@@ -5,11 +5,14 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
+    "api": "pnpm --filter @sesame/api",
+    "web": "pnpm --filter @sesame/web",
+    "schema": "pnpm --filter @sesame/schema",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@sesame/eslint-config": "workspace:*",
+    "@sesame/typescript-config": "workspace:*",
     "prettier": "^3.1.1",
     "turbo": "latest"
   },

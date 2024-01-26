@@ -1,0 +1,33 @@
+{
+  "extends": "../../packages/typescript-config/base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": [
+      "vitest/globals"
+    ],
+    "paths": {
+      "#exceptions": [
+        "./app/helpers/exceptions/*"
+      ],
+      "#types/*": [
+        "./app/types/*"
+      ],
+    },
+    "esModuleInterop": true,
+    "target": "ES6",
+    "sourceMap": true,
+    "strict": true,
+    "declaration": true,
+    "noEmitOnError": true,
+    "jsx": "react",
+    "noEmit": false,
+    "forceConsistentCasingInFileNames": true,
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "__test__",
+  ]
+}
