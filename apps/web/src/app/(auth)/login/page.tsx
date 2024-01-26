@@ -1,14 +1,18 @@
 'use client';
 import Button from '@/lib/button';
 import { css } from '../../../../styled-system/css';
-import LayoutAuth from '@/layout/auth';
 import FormField from '@/lib/form-field';
-import SeparatorLine from '@/lib/separator-line';
 import { AtSignIcon, Eye } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginSchema, type LoginSchemaType } from '@sesame/schema';
+import LayoutAuth from '../components/layout-auth';
+import SeparatorLine from '@/lib/separator-line';
+import ErrorNotification from '@/lib/error-notification';
+import { useState } from 'react';
 
 /*style */
-
 const headText = css({
   font: 'medium',
   fontSize: 'sm',
@@ -37,16 +41,49 @@ const icons = css({
 
 export default function Page() {
   const router = useRouter();
+  const [triggerCountNotif, setTriggerCountNotif] = useState(0);
+  const [errorServer, setErrorServer] = useState();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginSchemaType>({
+    resolver: zodResolver(loginSchema),
+  });
+
   const handleClickSignUp = () => {
     router.push('/register');
   };
+
+  const onSubmit = async (data: LoginSchemaType) => {
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
+
+    if (result.message === 'Login Success') router.push('/');
+    if (result.error) {
+      setErrorServer(result.error);
+      setTriggerCountNotif(triggerCountNotif + 1);
+    }
+  };
+
   return (
     <LayoutAuth>
-      <form className={form}>
+      <form
+        className={form}
+        onSubmit={handleSubmit(onSubmit)}>
         <p className={headText}>Sign in for</p>
+        <ErrorNotification
+          message={errorServer}
+          interval={3500}
+          triggerRender={triggerCountNotif}
+        />
         <FormField
           type="text"
-          name="Email"
+          name="email"
+          label="Email"
           placeholder="Enter your email"
           Icon={
             <AtSignIcon
@@ -54,10 +91,12 @@ export default function Page() {
               className={icons}
             />
           }
+          register={register}
         />
         <FormField
           type="password"
-          name="Password"
+          name="password"
+          label="Password"
           placeholder="Enter your password"
           Icon={
             <Eye
@@ -65,6 +104,7 @@ export default function Page() {
               className={icons}
             />
           }
+          register={register}
         />
         <div
           className={css({

@@ -1,12 +1,16 @@
 'use client';
-
 import Button from '@/lib/button';
 import { css } from '../../../../styled-system/css';
-import LayoutAuth from '@/layout/auth';
+import LayoutAuth from '@/app/(auth)/components/layout-auth';
 import FormField from '@/lib/form-field';
-import SeparatorLine from '@/lib/separator-line';
 import { AtSignIcon, Eye } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { registerSchema, type RegisterSchemaType } from '@sesame/schema';
+import SeparatorLine from '@/lib/separator-line';
+import ErrorNotification from '@/lib/error-notification';
+import { useState } from 'react';
 
 /*style */
 
@@ -32,22 +36,53 @@ const form = css({
 const icons = css({
   color: 'primary-500',
   opacity: '0.5',
+  marginLeft: '1rem',
 });
 
 /*style */
 
 export default function Page() {
   const router = useRouter();
+  const [triggerCountNotif, setTriggerCountNotif] = useState(0);
+  const [errorServer, setErrorServer] = useState();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterSchemaType>({ resolver: zodResolver(registerSchema) });
   const handleClickSignIn = () => {
     router.push('/login');
   };
+
+  const onSubmit = async (data: RegisterSchemaType) => {
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
+
+    if (result.message === 'success') router.push('/login');
+    if (result.error) {
+      setErrorServer(result.error);
+      setTriggerCountNotif(triggerCountNotif + 1);
+    }
+  };
+
   return (
     <LayoutAuth>
-      <form className={form}>
+      <form
+        className={form}
+        onSubmit={handleSubmit(onSubmit)}>
         <p className={headText}>Sign up for</p>
+        <ErrorNotification
+          message={errorServer}
+          interval={3500}
+          triggerRender={triggerCountNotif}
+        />
         <FormField
           type="text"
-          name="Email"
+          name="email"
+          label="Email"
           placeholder="Enter your email"
           Icon={
             <AtSignIcon
@@ -55,10 +90,13 @@ export default function Page() {
               className={icons}
             />
           }
+          error={errors.email?.message}
+          register={register}
         />
         <FormField
           type="password"
-          name="Password"
+          name="password"
+          label="Password"
           placeholder="Enter your password"
           Icon={
             <Eye
@@ -66,10 +104,13 @@ export default function Page() {
               className={icons}
             />
           }
+          error={errors.password?.message}
+          register={register}
         />
         <FormField
           type="password"
-          name="Confirm your Password"
+          name="confirmedPassword"
+          label="Confirm your password"
           placeholder="Confirm your password"
           Icon={
             <Eye
@@ -77,6 +118,8 @@ export default function Page() {
               className={icons}
             />
           }
+          error={errors.confirmedPassword?.message}
+          register={register}
         />
         <Button textContent="Sign up" />
         <a

@@ -16,6 +16,6 @@ router.route('/auth/register').post(validate(registerSchema, canals.body), regis
 
 router.route('/auth/me').get(AuthMiddleware.authenticate, GetMeController.handle('me'))
 
-router.route('/auth/logout').delete(logoutController.handle('logout'))
+router.route('/auth/logout').delete(AuthMiddleware.authenticate, logoutController.handle('logout'))
 
 export default router;

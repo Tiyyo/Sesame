@@ -1,10 +1,13 @@
 'use client';
-import { ComponentPropsWithRef, useState } from 'react';
+import { ComponentPropsWithRef, useEffect, useState } from 'react';
 import { css } from '../../../styled-system/css';
 
 interface FormFieldProps extends ComponentPropsWithRef<'input'> {
   Icon?: JSX.Element;
   SubIcon?: JSX.Element;
+  register?: any;
+  label?: string;
+  error?: unknown;
 }
 
 /* style */
@@ -24,7 +27,6 @@ const wrapperInput = css({
   border: '1px solid',
   borderColor: 'grey-light',
   borderRadius: '0.375rem',
-  padding: '0.725rem 0.625rem',
   marginTop: '0.5rem',
 });
 
@@ -32,6 +34,7 @@ const input = css({
   fontSize: 'xs',
   border: 'none',
   width: '100%',
+  padding: '0.725rem 0.625rem',
   _placeholder: {
     fontSize: '14px',
     opacity: '0.7',
@@ -43,11 +46,17 @@ const input = css({
 });
 /* style */
 
-export default function FormField({ ...props }: FormFieldProps) {
+export default function FormField({
+  register,
+  error,
+  name,
+  ...props
+}: FormFieldProps) {
   const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className={container}>
-      <label className={label}>{props.name}</label>
+      <label className={label}>{props.label}</label>
       <div className={wrapperInput}>
         <div onClick={() => setShowPassword(!showPassword)}>{props.Icon}</div>
         <input
@@ -61,8 +70,18 @@ export default function FormField({ ...props }: FormFieldProps) {
           className={input}
           placeholder={props.placeholder}
           autoComplete={props.type === 'password' ? 'off' : 'on'}
+          {...(register ? { ...register(name) } : undefined)}
         />
       </div>
+      <p
+        className={css({
+          color: 'red',
+          fontSize: '12px',
+          fontWeight: 'light',
+          marginTop: '0.35rem',
+        })}>
+        {typeof error === 'string' && error}
+      </p>
     </div>
   );
 }

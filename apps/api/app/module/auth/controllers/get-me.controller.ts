@@ -8,8 +8,9 @@ class GetMeController extends CoreController {
   }
 
   async me(req: Request, res: Response) {
-    const token = req.cookies._token
-    const userId = await tokenService.verify(token)
+    const token = req.headers.authorization?.split(' ')[1];
+
+    const userId = await tokenService.verify(token!)
 
     res.status(200).json({ userId })
   }

@@ -8,9 +8,10 @@ class LogoutController extends CoreController {
   }
 
   async logout(req: Request, res: Response, next: NextFunction) {
-    const token = req.cookies._token;
+    const token = req.headers.authorization?.split(' ')[1];
     res.clearCookie('_token');
-    await tokenService.destroy(token)
+
+    await tokenService.destroy(token!);
 
     return res.status(204).end();
   }

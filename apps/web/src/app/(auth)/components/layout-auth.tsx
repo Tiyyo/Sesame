@@ -1,5 +1,5 @@
-import NavAuth from '@/app/(auth)/nav-auth';
-import { css } from '../../styled-system/css';
+import NavAuth from '@/app/(auth)/components/nav-auth';
+import { css } from '../../../../styled-system/css';
 
 /* style */
 const main = css({

@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { css } from '../../../styled-system/css/css';
+import { css } from '../../../../styled-system/css/css';
 
 export default function NavAuth() {
   const router = useRouter();

@@ -6,11 +6,9 @@ import { productService } from '../index.products';
 
 class ProductController extends CoreController {
 
-
   constructor() {
     super();
     this.getAll = this.getAll.bind(this);
-
   }
 
   async getAll(_req: Request, res: Response, next: NextFunction) {

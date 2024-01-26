@@ -15,10 +15,8 @@ class LoginController extends CoreController {
     if (response instanceof UserError) {
       return res.status(response.status).json({ error: response.message });
     }
-    // Should have secure flag and domain
-    res.cookie('_token', response, { httpOnly: true });
 
-    return res.status(200).json({ message: 'success' });
+    return res.status(200).json({ message: 'success', _token: response });
   }
 }
 

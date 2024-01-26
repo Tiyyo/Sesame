@@ -26,10 +26,12 @@ export default defineConfig({
         "primary-300": { value: "hsl(104, 26%, 52%)" },
         "primary-400": { value: "hsl(102, 26%, 40%)" },
         "primary-500": { value: "hsl(102, 26%, 32%)" },
-      },
+        "error-light": { value: '#feebec' },
+        "error": { value: '#fdbdbe' },
+        "error-dark": { value: '#ce2c31' },
+      }
     },
   },
-
   // The output directory for your css system
   outdir: "styled-system",
 });

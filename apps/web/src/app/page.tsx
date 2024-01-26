@@ -1,5 +1,7 @@
 import { css } from '../../styled-system/css';
-import ProductsContainer from './products.container';
+import LogoutBn from './(auth)/components/logout-btn';
+import ProductsContainer from './components/products-container';
+import { cookies } from 'next/headers';
 
 export type Product = {
   article: {
@@ -10,13 +12,29 @@ export type Product = {
   };
 };
 
-export default async function Home() {
+export async function getProdutcs() {
+  const cookieStore = cookies();
+  const token = cookieStore.get('_token');
+  if (!token) throw new Error('User is not logged in');
+
   const results = await fetch('http://localhost:8000/api/products', {
     method: 'GET',
     cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token.value}`,
+    },
+    credentials: 'include',
   });
+
+  if (!results.ok) throw new Error('Error fetching products');
   const fetchProducts = await results.json();
   const products: Product[] = fetchProducts.data;
+  return products;
+}
+
+export default async function Home() {
+  const products = await getProdutcs();
 
   return (
     <section
@@ -34,7 +52,7 @@ export default async function Home() {
           padding: '0 15px',
           height: '60px',
         })}>
-        <p>Hello 🐼!</p> <button className={css({})}>Logout</button>
+        <p>Hello 🐼!</p> <LogoutBn />
       </header>
       <main>
         <ProductsContainer products={products} />

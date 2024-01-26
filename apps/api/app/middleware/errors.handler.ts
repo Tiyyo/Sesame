@@ -17,7 +17,7 @@ export class ErrorHandler {
       err instanceof UnauthorizedError
     ) {
       console.log(`${err.name} : ${err.message}`)
-      return res.status(err.status).json({ message: err.userMessage });
+      return res.status(err.status).json({ error: err.userMessage });
     }
     return res.status(500).json({ message: 'internal server error' });
   }
